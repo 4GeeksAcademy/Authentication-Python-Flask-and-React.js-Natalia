@@ -1,0 +1,123 @@
+
+body {
+  font-family: "Source Code Pro", monospace;
+  margin: 0;
+  padding: 0;
+  background-image: url("/src/front/assets/back.webp");
+  background-size: cover;         /* dopasuj tło do całej strony */
+  background-position: center;    /* wycentruj */
+  background-repeat: no-repeat;   /* nie powtarzaj */
+  min-height: 100vh;              /* pełna wysokość ekranu */
+}
+
+.navbar {
+  background: #9065f4;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  margin-left: 10px;
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 30vh;          /* down */
+  text-align: center;
+  background: rgba(218, 115, 204, 0.786); /* lekko przezroczyste tło */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: whitesmoke;
+}
+
+
+input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+.private-container {
+  text-align: center;
+  margin-top: 50px;
+}
+.button {
+  background: linear-gradient(90deg, #871df0, #1d9ff5);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Source Code Pro", monospace;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: linear-gradient(90deg, #a4f662, #d5f067);
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Animacja wejścia */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+.tv-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.tv-text {
+  color: #00ffcc;
+  font-family: "Courier New", monospace;
+  font-size: 2rem;
+  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+}
+
+.tv-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  color: black;
+  background-color: #00ffcc;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: "Courier New", monospace;
+  transition: 0.2s;
+}
+
+.tv-button:hover {
+  background-color: #009988;
+  transform: scale(1.05);
+}
+.tv-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+

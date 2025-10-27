@@ -1,11 +1,31 @@
 // Import necessary hooks and functions from React.
 import { useContext, useReducer, createContext } from "react";
 import storeReducer, { initialStore } from "../store"  // Import the reducer and the initial state.
-
+import { useNavigate } from "react-router-dom";
 // Create a context to hold the global state of the application
 // We will call this global state the "store" to avoid confusion while using local states
 const StoreContext = createContext()
+export const useAuth = () => {
+  const navigate = useNavigate();
+  const saveToken = (token) => {
+    sessionStorage.setItem("token", token);
+  };
 
+  const getToken = () => {
+    return sessionStorage.getItem("token");
+  };
+
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  };
+
+  const isAuthenticated = () => {
+    return !!getToken();
+  };
+
+  return { saveToken, getToken, logout, isAuthenticated };
+};
 // Define a provider component that encapsulates the store and warps it in a context provider to 
 // broadcast the information throught all the app pages and components.
 export function StoreProvider({ children }) {
@@ -22,3 +42,6 @@ export default function useGlobalReducer() {
     const { dispatch, store } = useContext(StoreContext)
     return { dispatch, store };
 }
+
+
+
