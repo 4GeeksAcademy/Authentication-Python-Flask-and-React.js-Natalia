@@ -11,7 +11,7 @@ body {
 }
 
 .navbar {
-  background: #9065f4;
+  background: #bbdd33dd;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
@@ -81,36 +81,79 @@ input {
 
 
 .tv-overlay {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 40px;
-  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;  /* odstęp między tekstem a przyciskiem */
+  background: rgba(81, 80, 80, 0.042);
+  padding: 60px;
   border-radius: 10px;
 }
 
-.tv-text {
-  color: #00ffcc;
-  font-family: "Courier New", monospace;
-  font-size: 2rem;
-  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
-}
 
 .tv-button {
   display: inline-block;
-  margin-top: 20px;
-  padding: 10px 25px;
-  color: black;
-  background-color: #00ffcc;
-  border: none;
-  border-radius: 5px;
+  margin-top: -20px;       
+  padding: 45px 380px;     
+  font-size: 3rem;   
+  white-space: nowrap;
+  color: rgb(7, 28, 15);
+  background-color: #090909;
+  border-color: aliceblue;
+  border-radius: 20px;
   text-decoration: none;
   font-family: "Courier New", monospace;
+  position: relative;         /* ważne dla pseudo-elementów */
   transition: 0.2s;
+  overflow: hidden;           /* ukrywa nadmiar tekstu */
+}
+
+.tv-button span.normal-text {
+  color: #f8f7f9;
+  font-family: "Courier New", monospace;
+  font-size: 5rem;
+  margin-top: 0;
+  text-shadow: 0 0 8px #eaf551, 0 0 15px #bfea8b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: center;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+
+/* Tekst na hover */
+.tv-button span.hover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Hover effect */
+.tv-button:hover span.normal-text {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.tv-button:hover span.hover-text {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 }
 
 .tv-button:hover {
-  background-color: #009988;
-  transform: scale(1.05);
+  background-color: #afd62fde;
+  transform: scale(1.1);
 }
+
+
 .tv-background {
   width: 100%;
   height: 100%;
@@ -120,4 +163,3 @@ input {
   left: 0;
   z-index: -1;
 }
-

@@ -8,7 +8,8 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container">
-        <Link to="/" className="logo">NatiSen Full Stack Developer Concept Page</Link>
+        <Link to="/" className="logo">🟦</Link>
+
         <div>
           {!isAuthenticated() ? (
             <>

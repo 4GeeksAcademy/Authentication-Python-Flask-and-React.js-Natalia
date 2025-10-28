@@ -12,8 +12,10 @@ export const Home = () => {
         alt="No Signal"
       />
       <div className="tv-overlay">
-        <h1 className="tv-text">NO SIGNAL</h1>
-        <Link to="/signup" className="tv-button">Enter System</Link>
+        <Link to="/signup" className="tv-button">
+          <span className="normal-text">NO SIGNAL</span>
+          <span className="hover-text">ENTER THE SYSTEM</span>
+        </Link>
       </div>
     </div>
   );
