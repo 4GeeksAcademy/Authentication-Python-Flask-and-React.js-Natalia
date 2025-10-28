@@ -4,10 +4,10 @@ body {
   margin: 0;
   padding: 0;
   background-image: url("/src/front/assets/back.webp");
-  background-size: cover;         /* dopasuj tło do całej strony */
-  background-position: center;    /* wycentruj */
-  background-repeat: no-repeat;   /* nie powtarzaj */
-  min-height: 100vh;              /* pełna wysokość ekranu */
+  background-size: cover;         
+  background-position: center;    
+  background-repeat: no-repeat;   
+  min-height: 100vh;              
 }
 
 .navbar {
@@ -33,7 +33,7 @@ body {
   margin: 0 auto;
   margin-top: 30vh;          /* down */
   text-align: center;
-  background: rgba(218, 115, 204, 0.786); /* lekko przezroczyste tło */
+  background: rgba(218, 115, 204, 0.786); 
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -72,7 +72,7 @@ input {
 }
 
 
-/* Animacja wejścia */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -88,7 +88,7 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;  /* odstęp między tekstem a przyciskiem */
+  gap: 5px;  
   background: rgba(81, 80, 80, 0.042);
   padding: 60px;
   border-radius: 10px;
@@ -107,9 +107,9 @@ input {
   border-radius: 20px;
   text-decoration: none;
   font-family: "Courier New", monospace;
-  position: relative;         /* ważne dla pseudo-elementów */
+  position: relative;         
   transition: 0.2s;
-  overflow: hidden;           /* ukrywa nadmiar tekstu */
+  overflow: hidden;           
 }
 
 .tv-button span.normal-text {
@@ -127,7 +127,7 @@ input {
 }
 
 
-/* Tekst na hover */
+
 .tv-button span.hover-text {
   position: absolute;
   top: 50%;
@@ -137,7 +137,7 @@ input {
   transition: transform 0.3s, opacity 0.3s;
 }
 
-/* Hover effect */
+
 .tv-button:hover span.normal-text {
   transform: scale(0);
   opacity: 0;
