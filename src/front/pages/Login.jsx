@@ -11,18 +11,22 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const resp = await fetch("http://localhost:3001/api/token", {
+      const resp = await fetch("http://localhost:3001/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      if (!resp.ok) throw new Error("Login failed");
+
+      if (!resp.ok) {
+        const errData = await resp.json();
+        throw new Error(errData.msn || "Login failed");
+      }
 
       const data = await resp.json();
-      saveToken(data.token);
+      saveToken(data.JWT); 
       navigate("/private");
     } catch (err) {
-      alert("Invalid email or password");
+      alert(err.message);
     }
   };
 
@@ -44,9 +48,7 @@ export const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-            <button type="submit" className="button">
-      Step Into
-    </button>
+        <button type="submit" className="button">Step Into</button>
       </form>
     </div>
   );

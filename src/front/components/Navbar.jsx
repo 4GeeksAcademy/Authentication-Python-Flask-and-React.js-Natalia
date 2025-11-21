@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; 
 import { useAuth } from "../hooks/useAuth";
+import "../index.css"; 
 
 export const Navbar = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -8,16 +9,24 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container">
-        <Link to="/" className="logo">🟦</Link>
+        <Link to="/" className="logo">
+          🟦
+        </Link>
 
         <div>
           {!isAuthenticated() ? (
             <>
-              <Link to="/signup" className="btn">Signup</Link>
-              <Link to="/login" className="btn">Login</Link>
+              <Link to="/signup" className="btn">
+                Signup
+              </Link>
+              <Link to="/login" className="btn">
+                Login
+              </Link>
             </>
           ) : (
-            <button className="btn" onClick={logout}>Logout</button>
+            <button className="btn" onClick={logout}>
+              Logout
+            </button>
           )}
         </div>
       </div>

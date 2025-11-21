@@ -13,8 +13,12 @@ export const Home = () => {
       />
       <div className="tv-overlay">
         <Link to="/signup" className="tv-button">
-          <span className="normal-text">NO SIGNAL</span>
-          <span className="hover-text">ENTER THE SYSTEM</span>
+          <span className="normal-text">WELCOME</span>
+          <span className="hover-text">SIGN UP</span>
+        </Link>
+        <Link to="/login" className="tv-button" style={{ marginTop: "20px" }}>
+          <span className="normal-text">ALREADY HAVE ACCOUNT?</span>
+          <span className="hover-text">LOGIN</span>
         </Link>
       </div>
     </div>
