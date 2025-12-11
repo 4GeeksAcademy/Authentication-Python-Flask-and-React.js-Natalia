@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../index.css";
 import nosignalImg from "../assets/error.png"; 
 
+
 export const Home = () => {
   return (
     <div className="tv-screen">

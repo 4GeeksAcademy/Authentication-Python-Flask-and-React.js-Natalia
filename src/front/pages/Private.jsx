@@ -1,60 +1,49 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
 
 export const Private = () => {
-  const [message, setMessage] = useState(""); // Wiadomość do wyświetlenia
-  const [loading, setLoading] = useState(true); // Stan ładowania
-  const { getToken, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const API = import.meta.env.VITE_BACKEND_URL || "";
 
   useEffect(() => {
-   
-    if (!isAuthenticated()) {
-      console.log("User not authenticated. Redirecting to login...");
-      navigate("/login");
-      return;
-    }
-
-
-    const token = getToken();
-    console.log("Token JWT:", token);
-
-   
-    fetch("http://localhost:3001/protected", {
-      headers: { Authorization: "Bearer " + token },
-    })
-      .then((res) => {
-        console.log("Response status:", res.status);
-        if (!res.ok) {
-          if (res.status === 401) {
-            console.warn("Unauthorized! Logging out...");
-            logout();
-            navigate("/login");
-          }
-          throw new Error("Unauthorized");
+    const token = sessionStorage.getItem("token");
+    if (!token) { navigate("/login", { replace: true }); return; }
+    (async () => {
+      try {
+        const res = await fetch(`${API}/api/private`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.status === 401) { 
+          sessionStorage.removeItem("token"); 
+          navigate("/login", { replace: true }); 
+          return; 
         }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Data received from backend:", data);
-        
-        setMessage(
-          `Welcome ${data.user.name}! Email: ${data.user.email}, Age: ${data.user.edad}, Description: ${data.user.description}`
-        );
+        const data = await res.json();
+        setMsg(data.msg || "OK");
+      } catch (err) {
+        setError(err.message || "Failed to fetch");
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching private data:", err);
-        navigate("/login");
-      });
-  }, [navigate, isAuthenticated, getToken, logout]);
+      }
+    })();
+  }, [navigate, API]);
 
-  
+  if (loading) {
+    return <p>Ładowanie...</p>;
+  }
+
+  if (error) {
+    return <p style={{ color: "pink" }}>{error}</p>;
+  }
+
   return (
     <div className="private-container">
-      <h2>User Dashboard</h2>
-      {loading ? <p>Loading...</p> : <p>{message}</p>}
+      <h1>Welcome!</h1>
+      <h3><svg xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="#220c70c4"><path d="m723-611-38 34q-11 10-28 11.5t-31-8.5q-14-10-16.5-27t1.5-30l17-58-43-24q-14-8-18-22.5t1-30.5q5-16 17-24t29-8h49l15-45q5-15 16.5-26.5T723-881q17 0 28.5 11.5T768-843l15 45h49q15 0 28 8.5t18 23.5q5 14 1 29.5T860-713l-43 24 17 58q5 14 2.5 30.5T820-574q-14 9-31 8t-28-11l-38-34Zm0-60q17 0 28.5-11.5T763-711q0-17-11.5-28.5T723-751q-17 0-28.5 11.5T683-711q0 17 11.5 28.5T723-671ZM529-231q22 54-15.5 102.5T415-80q-32 0-58-15.5T316-143q-67 7-122-47.5T143-312q-30-16-46.5-48.5T80-422q0-67 47-99.5t113-3.5l60 24q17-37 49.5-57.5T421-581v-86h49v90q41 8 72 43t38 67h90v50h-86q-3 39-23 71.5T504-296l25 65Zm-231 29q-3-27 2-55.5t15-55.5q-27 14-55.5 17t-57.5-1q2 33 33 64t63 31Zm-74-153q40 0 84.5-21.5T368-408l-142-58q-25-11-55.5 2.5T140-424q0 26 33.5 47.5T224-355Zm191 215q31 0 49.5-20.5T472-209l-60-155q-18 29-36 61.5T358-220q0 20 14.5 50t42.5 30Zm65-212q26-15 35-36t9-45q0-35-25.5-60.5T438-519q-24 0-46.5 11T358-472l87 34 35 86Zm-165 39Z"/></svg></h3>
+      <p>{msg}</p>
     </div>
   );
 };

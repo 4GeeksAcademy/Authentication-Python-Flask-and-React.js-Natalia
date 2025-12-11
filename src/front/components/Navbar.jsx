@@ -1,10 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom"; 
-import { useAuth } from "../hooks/useAuth";
-import "../index.css"; 
+import { Link, useNavigate } from "react-router-dom";
+import "../index.css";
 
 export const Navbar = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    navigate("/login", { replace: true });
+  };
 
   return (
     <nav className="navbar">
@@ -14,7 +18,7 @@ export const Navbar = () => {
         </Link>
 
         <div>
-          {!isAuthenticated() ? (
+          {!token ? (
             <>
               <Link to="/signup" className="btn">
                 Signup
@@ -22,6 +26,9 @@ export const Navbar = () => {
               <Link to="/login" className="btn">
                 Login
               </Link>
+              <Link to="/private"className="btn">
+              Private
+              </Link>{" "}
             </>
           ) : (
             <button className="btn" onClick={logout}>
@@ -32,4 +39,4 @@ export const Navbar = () => {
       </div>
     </nav>
   );
-};
+}

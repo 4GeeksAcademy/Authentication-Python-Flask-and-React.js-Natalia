@@ -163,3 +163,33 @@ input {
   left: 0;
   z-index: -1;
 }
+
+
+.private-container h1 {
+  font-family: "Courier New", monospace;
+  font-size: 5rem;
+  color: rgb(37, 24, 158);
+  text-shadow: 0 0 8px #eaf551, 0 0 15px #bfea8b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: center;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.private-container h1 {
+  animation: glow 2s infinite;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 8px #eaf551, 0 0 15px #bfea8b;
+  }
+  50% {
+    text-shadow: 0 0 15px #eaf551, 0 0 30px #bfea8b;
+  }
+  100% {
+    text-shadow: 0 0 8px #eaf551, 0 0 15px #bfea8b;
+  }
+}
